@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+
+<body>
+    <br>
+    <div class="log" style="float:right; margin-right:50px">
+        <button onclick="location.href = '{{url_for('showLogin')}}'" class="btn btn-success">
+            Log in <span class="glyphicon glyphicon-log-in"></span>
+        </button>
+        <button onclick="location.href = '{{url_for('showcategories')}}'" class="btn btn-warning">
+            categories <span class="glyphicon glyphicon-home"></span>
+        </button>
+    </div>
+    <br>
+    <br>
+    <div class='pane'>
+        <h1 align="center">{{ categories.name }} Books</h1>
+        <p align="center">{{categories.description}}</p>
+
+        {% if books !=[] %}
+        </br>
+        </br>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h2>eBooks <img src="http://www.bookmasters.com/Content/images/ebook_blue.png" width="30px"></h2> 
+			{% for b in books %} 
+			{% if b.type == 'eBook' %}
+            <h3>{{b.name}}</h3>
+            <p><em>{{b.author}}</em>
+            </p>
+            <p>{{b.description}}</p>
+            <p>{{b.price}}</p>
+            <br>
+            <hr class="my-4"> 
+			{% endif %}
+			{% endfor %}
+            </br>
+            </br>
+        </div>
+
+        <div class="col-md-5">
+            <h2>Hard Copy <img src="http://wfarm4.dataknet.com/static/resources/icons/set112/3c4e918c.png" width="30px"></h2> 
+			{% for b in books %}
+			{% if b.type == 'hardCopy' %}
+            <h3>{{b.name}}</h3>
+            <p><em>{{b.author}}</em>
+            </p>
+            <p>{{b.description}}</p>
+            <p>{{b.price}}</p>
+            <br>
+            <hr class="my-4">
+			{% endif %} 
+			{% endfor %}
+            </br>
+            </br>
+        </div>
+
+        {% else %}
+        <p>Currently there are no books of this categories.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

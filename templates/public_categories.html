@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+
+
+<body>
+    <div class="log" style="float:right; margin-right:50px">
+        <button onclick="location.href = '{{url_for('showLogin')}}'" class="btn btn-success">
+            Log in <span class="glyphicon glyphicon-log-in"></span>
+        </button>
+    </div>
+    <h1 align="center"><em>categories</em></h1>
+    <p align="center"> Here you can find all literature categories that have already been added to BookShelf </p>
+
+    {% for categories in categories %}
+    <div class="panel" style="margin-left:30px; margin-right:30px; background:#b3ffd9; font-family:\" Times New Roman\ ", Times, serif">
+        <a href="{{url_for('showBooks', categories_id = categories.id)}}">
+            <h3>{{categories.name}}</h3>
+        </a>
+        <p>{{categories.description}}</p>
+        <hr>
+    </div>
+
+
+
+    {% endfor %}
+
+    </div>
+</body>
+
+</html>

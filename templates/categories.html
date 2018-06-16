@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+</head>
+
+<body>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <script>
+        var messages = {
+            {
+                messages | safe
+            }
+        };
+        for (var i = 0; i < messages.length; i++) {
+            alert(messages[i]);
+        }
+    </script>
+    {% endif %} {% endwith %}
+    <div class='pane'>
+
+        <h1 align="center" style="font-size:40px; font-family:font-family:\" Times New Roman\ ", Times, serif"><em>categories</em></h1>
+        <p align="center"> Here you can find all literature categories of BookShelf </p>
+        <p align="right" style="margin-right:50px"> You've successfully logged in as <em> {{user}} </em> <img src='{{picture}}' style="width: 100px; height: 100px;border-radius: 100px;"> </p>
+        <div class="btn-group" style="margin-left:30px">
+            <button onclick="location.href = '{{url_for('newcategories')}}'" class="btn btn-info">
+                Add a New Category <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            <button onclick="location.href = '{{url_for('gdisconnect')}}'" class="btn btn-success">
+                Log out <span class="glyphicon glyphicon-log-out"></span>
+            </button>
+        </div>
+        <br>
+        <br> {% for categories in categories %}
+        <div class="jumbotron" style="margin-left:30px; margin-right:30px; background:#b3ffd9; font-family:\" Times New Roman\ ", Times, serif">
+            <a href="{{url_for('showBooks', categories_id = categories.id)}}">
+                <p style="font-size:30px"> <em>{{categories.name}}</em>
+                    <p>
+            </a>
+            <hr class="my-4">
+            <p>{{categories.description}}</p>
+            <div class="btn-group" style="float: right; margin-right:30px">
+                <button onclick="location.href = '{{url_for('editcategories',categories_id = categories.id)}}'" class="btn btn-success">
+                    Edit <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button onclick="location.href = '{{url_for('deletecategories',categories_id = categories.id)}}'" class="btn btn-success">
+                    Delete <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
